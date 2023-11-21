@@ -1,24 +1,19 @@
 package uitest.m4;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
 import static Helper.Pages.SAVINGS;
 
 public class NavigationTest {
     private static final String PREFIX = "file:///" + System.getProperty("user.dir") + "\\src\\web\\";
-
-
+    WebDriver driver;
     @Test
     public void basicNavigationTest() {
-
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = Factory.DriverFactory.createdNewChromeDriver();
 
         driver.get(PREFIX + "index.html");
         DemoHelper.chosenTimePause(5000);
@@ -32,17 +27,15 @@ public class NavigationTest {
         DemoHelper.pause();
         driver.navigate().refresh();
         DemoHelper.pause();
-
-        driver.quit();
+;
     }
     @Test
     public void basicNavigationTestRefactored(){
-        WebDriver driver = DriverFactory.newDriver();
-
-        driver.get(HOME);
+        driver = DriverFactory.initDriver();
         driver.get(SAVINGS);
 
-        driver.quit();
-
     }
+
+    @AfterMethod
+    public void cleanup() {driver.quit();}
 }

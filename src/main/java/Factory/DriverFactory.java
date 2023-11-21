@@ -15,7 +15,9 @@ import static Helper.Pages.HOME;
 public class DriverFactory {
 
     public static WebDriver createdNewHeadlessChromeDriver() {
-        return appliedCommonSetupDriver(new ChromeDriver(headlessOption()));
+        WebDriver driver = new ChromeDriver(headlessOption());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        return driver;
     }
 
     public static WebDriver createdNewChromeDriver() {
@@ -42,8 +44,10 @@ public class DriverFactory {
         return driver;
     }
 
-    public static void initDriver(WebDriver driver) {
-        driver = Factory.DriverFactory.createdNewChromeDriver();
+
+    public static WebDriver initDriver() {
+        WebDriver driver = DriverFactory.createdNewChromeDriver();
         driver.get(HOME);
+        return driver;
     }
 }

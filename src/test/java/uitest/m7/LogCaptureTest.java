@@ -9,7 +9,6 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.logging.Level;
@@ -37,6 +36,7 @@ public class LogCaptureTest {
         browserLogs.forEach(logEntry -> System.out.println(logEntry.getLevel() + " " + logEntry.getMessage()));
 
         //browserLogs.forEach(this::checkNoError);
+        driver.quit();
 
     }
 
@@ -44,8 +44,4 @@ public class LogCaptureTest {
         Assert.assertNotEquals(logEntry.getLevel().getName(), "SEVERE");
     }
 
-    @AfterMethod
-    public void cleanup() {
-        driver.quit();
-    }
 }

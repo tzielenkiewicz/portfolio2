@@ -1,7 +1,7 @@
 package uitest.m4;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import static Helper.Pages.SAVINGS;
 public class SelectingTest {
     @Test
     public void selectingTest() {
-        WebDriver driver = DriverFactory.newDriver();
+        WebDriver driver = DriverFactory.createdNewChromeDriver();
         driver.get(SAVINGS);
 
         WebElement inputDeposit = driver.findElement(By.id("deposit"));
@@ -23,9 +23,9 @@ public class SelectingTest {
         WebElement dropDownPeriod = driver.findElement(By.id("period"));
         Select dropDown = new Select(dropDownPeriod);
         dropDown.selectByValue("6 months");
-        DemoHelper.pause();
+        DemoHelper.chosenTimePause(1000);
         dropDown.selectByVisibleText("1 Year");
-        DemoHelper.pause();
+        DemoHelper.chosenTimePause(1000);
         dropDown.selectByIndex(2);
 
         WebElement resultInfo = driver.findElement(By.id("result"));

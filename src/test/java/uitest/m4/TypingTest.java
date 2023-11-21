@@ -1,19 +1,16 @@
 package uitest.m4;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
-
 public class TypingTest {
     @Test
     public void typingTest(){
-        WebDriver driver = DriverFactory.newDriver();
-        driver.get(HOME);
+        WebDriver driver = DriverFactory.initDriver();
 
         WebElement inputName = driver.findElement(By.id("firstName"));
         WebElement inputLastName = driver.findElement(By.id("lastName"));
@@ -30,7 +27,5 @@ public class TypingTest {
         inputDateOfBirth.sendKeys("21032022");
         DemoHelper.pause();
         driver.quit();
-
-
     }
 }

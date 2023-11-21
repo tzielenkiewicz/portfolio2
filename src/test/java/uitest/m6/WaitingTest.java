@@ -1,6 +1,5 @@
 package uitest.m6;
 
-import Helper.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -22,24 +22,24 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 public class WaitingTest {
 
     WebDriver driver;
-    @Test
-    public void implicitWaitTest() {
+    @BeforeMethod
+    public void initiation() {
         driver = new ChromeDriver();
         driver.get(LOANS);
+    }
+    @Test
+    public void implicitWaitTest() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
 
         driver.findElement(By.id("borrow")).sendKeys("500");
 
         Assert.assertFalse(driver.findElement(By.id("result")).isDisplayed()); //element istnieje w HTML, ale jeszcze nie jest wyświetlony, na takie elementy metoda timeouts nie działa
         driver.findElement(By.id("result")).click(); //jeśli nie ma w co klikać, to program "przypomina sobie", że ma ustawiony timeouts 6s, jeśli element się pojawi przez ten czas, test przejdzie
-
     }
 
     @Test
     public void explicitWaitTest() {
         //explicit wait to metoda raczej stosowana do konkretnych, wyselekcjonowanych czynności podczas testu
-        driver = new ChromeDriver();
-        driver.get(LOANS);
         driver.findElement(By.id("borrow")).sendKeys("500");
 
         WebDriverWait waitingForResult = new WebDriverWait(driver, Duration.ofSeconds(6));
@@ -47,28 +47,18 @@ public class WaitingTest {
         Assert.assertTrue(result.isDisplayed());
 
         result.click(); //interactable?
-
-    }
-
-    public static WebElement waitUntilClicable(WebDriver driver, By locator) {
-        return new WebDriverWait(driver, Duration.ofSeconds(6)).until(elementToBeClickable(locator));
     }
 
     @Test
     public void explicitWaitTestRefactored() {
-        driver = new ChromeDriver();
-        driver.get(LOANS);
         driver.findElement(By.id("borrow")).sendKeys("500");
 
-        WebElement result = waitUntilClicable(driver, By.id("result"));
+        WebElement result = waitUntilClickable(driver, By.id("result"));
         Assert.assertTrue(result.isDisplayed());
-
     }
 
     @Test
     public void fluentWaitTest() {
-        driver = DriverFactory.newDriver();
-        driver.get(LOANS);
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(6))
                 .pollingEvery(Duration.ofMillis(200))
@@ -78,11 +68,14 @@ public class WaitingTest {
 
         WebElement result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("result")));
         result.click();
-
     }
 
     @AfterMethod
     public void cleanup() {
         driver.quit();
+    }
+
+    public static WebElement waitUntilClickable(WebDriver driver, By locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(6)).until(elementToBeClickable(locator));
     }
 }

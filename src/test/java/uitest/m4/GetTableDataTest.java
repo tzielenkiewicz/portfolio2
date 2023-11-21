@@ -1,6 +1,6 @@
 package uitest.m4;
 
-import Helper.DriverFactory;
+import Factory.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,12 +10,13 @@ import java.util.List;
 
 import static Helper.Pages.SAVINGS;
 
-public class GetTableDataDemo {
+public class GetTableDataTest {
 
     @Test
     public void getTableData() {
-        WebDriver driver = DriverFactory.newDriver();
+        WebDriver driver = DriverFactory.createdNewChromeDriver();
         driver.get(SAVINGS);
+
         WebElement table = driver.findElement(By.id("rates"));
         System.out.println("Table data:");
         System.out.println(table.getText());

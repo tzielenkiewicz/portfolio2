@@ -23,7 +23,7 @@ public class HandleAlertsByDefaultTest {
         driver.findElement(By.id("clear")).click();
         driver.findElement(By.id("register")).click();
 
-        DemoHelper.pause();
+        DemoHelper.chosenTimePause(5000);
         driver.quit();
     }
 }

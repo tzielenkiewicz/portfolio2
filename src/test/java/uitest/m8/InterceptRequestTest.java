@@ -1,5 +1,6 @@
 package uitest.m8;
 
+import Factory.DevToolsFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,7 @@ public class InterceptRequestTest {
     @Test
     public void captureChromeRequestTrafficTest() {
         ChromeDriver chDriver = new ChromeDriver();
-        DevTools chTools = getDevTools(chDriver);
+        DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
         chTools.addListener(Network.requestWillBeSent(),
                 requestEvent -> {
                     Request httpRequest = requestEvent.getRequest();
@@ -62,7 +63,7 @@ public class InterceptRequestTest {
     @Test
     public void captureChromeResponseTrafficTest() {
         ChromeDriver chDriver = new ChromeDriver();
-        DevTools chTools = getDevTools(chDriver);
+        DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
 
         chTools.addListener(Network.responseReceived(),
                 responseReceived -> {
@@ -80,21 +81,15 @@ public class InterceptRequestTest {
     @Test
     public void manipulateChromeTrafficTest() {
         ChromeDriver chDriver = new ChromeDriver();
-        DevTools chTools = getDevTools(chDriver);
+        DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
 
-       // chTools.send(Network.setBlockedURLs(List.of("*/footer.js")));
+        //chTools.send(Network.setBlockedURLs(List.of("*/footer.js")));
 
         chDriver.get("http://127.0.0.1:8080/index.html");
-        WebElement location = new WebDriverWait(chDriver, Duration.ofSeconds(2))
+        WebElement location = new WebDriverWait(chDriver, Duration.ofSeconds(5))
                 .until(visibilityOfElementLocated(By.id("location")));
         Assert.assertTrue(location.getText().contains("You are visiting us from"));
-    }
 
-    private static DevTools getDevTools(WebDriver driver) {
-            DevTools devTools = ((ChromeDriver) driver).getDevTools();
-            devTools.createSession();
-            devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-            return devTools;
+        chDriver.quit();
     }
-
 }

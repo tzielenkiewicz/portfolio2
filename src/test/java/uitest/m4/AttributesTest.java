@@ -1,5 +1,6 @@
 package uitest.m4;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +10,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static Factory.DriverFactory.initDriver;
-
 public class AttributesTest {
     WebDriver driver;
     @BeforeMethod
-    public void driverInitiation() {
-        initDriver(driver);
+    public void homeInitiation(){
+        driver = DriverFactory.initDriver();
     }
+
     @Test
     public void isEnabledTest() {
         WebElement textAreaToEnable = driver.findElement(By.id("textarea"));

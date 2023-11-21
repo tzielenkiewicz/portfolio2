@@ -1,20 +1,18 @@
 package uitest.m6;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
 import static Helper.Pages.SAVINGS;
 
 public class WindowManagementTest {
     @Test
     public void tabsAndWindowsTest() {
-        WebDriver driver = new ChromeDriver();
-        driver.get(HOME);
+        WebDriver driver = DriverFactory.initDriver();
 
         String firstTab = driver.getWindowHandle();
 

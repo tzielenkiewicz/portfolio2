@@ -1,7 +1,7 @@
 package uitest.m5;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -9,18 +9,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
-import static Helper.Pages.HOME;
 import static Helper.Pages.SAVINGS;
 
 public class StorageAndCookiesTest {
+    WebDriver driver;
     @Test
     public void storageTest() {
-        WebDriver driver = DriverFactory.newDriver();
-        driver.get(HOME);
+        driver = Factory.DriverFactory.initDriver();
+
         WebElement firstName = driver.findElement(By.id("firstName"));
         WebElement lastName = driver.findElement(By.id("lastName"));
         WebElement birthDatePicker = driver.findElement(By.id("dob"));
@@ -60,23 +61,19 @@ public class StorageAndCookiesTest {
 
         Assert.assertEquals(firstNameAfterRefresh.getAttribute("value"), "");
         Assert.assertEquals(lastNameAfterRefresh.getAttribute("value"), "");
-
-
-
-
-        driver.quit();
     }
     @Test
     public void cookiesTest() {
-        WebDriver driver = DriverFactory.newDriver();
+        driver = DriverFactory.initDriver();
         WebDriver.Options options = driver.manage();
 
         Set<Cookie> cookies = options.getCookies();
+        System.out.println(cookies.size());
         Cookie namedThing = options.getCookieNamed("thing");
+
         options.deleteAllCookies();
-
-        driver.quit();
-
     }
 
+    @AfterMethod
+    public void cleanup() {driver.quit();}
 }

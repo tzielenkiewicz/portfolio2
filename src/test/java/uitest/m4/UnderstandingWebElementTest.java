@@ -1,19 +1,16 @@
 package uitest.m4;
 
-import Helper.DriverFactory;
+import Factory.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
-
-public class UnderstandingWebElement {
+public class UnderstandingWebElementTest {
 
     @Test
     public void webElementTest() {
-        WebDriver driver = DriverFactory.newDriver();
-        driver.get(HOME);
+        WebDriver driver = DriverFactory.initDriver();
 
         WebElement inputName = driver.findElement(By.id("firstName"));
         System.out.println(inputName.isDisplayed());

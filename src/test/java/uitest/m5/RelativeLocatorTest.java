@@ -1,20 +1,17 @@
 package uitest.m5;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
-
 public class RelativeLocatorTest {
     @Test
     public void relativeLocatorTest () {
-        WebDriver driver = DriverFactory.newDriver();
-        driver.get(HOME);
+        WebDriver driver = DriverFactory.initDriver();
 
         WebElement email = driver.findElement(By.id("email"));
         RelativeLocator.RelativeBy input = RelativeLocator.with(By.tagName("input"));

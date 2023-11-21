@@ -27,7 +27,6 @@ public class RefactorSetupCleanupTest {
 
         WebElement messageReturned = WaitingUtils.waitUntilVisible(chDriver, By.id("result"), 6);
         Assert.assertEquals(messageReturned.getText(), "You will pays us back 1000");
-
     }
 
     @Test

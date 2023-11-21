@@ -1,7 +1,7 @@
 package uitest.m5;
 
+import Factory.DriverFactory;
 import Helper.DemoHelper;
-import Helper.DriverFactory;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,16 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Helper.Pages.HOME;
-
 public class HandleDialogTest {
     @Test
     public void dismissAlertTest() {
-        WebDriver driver = DriverFactory.newDriver();
-        driver.get(HOME);
+        WebDriver driver = DriverFactory.initDriver();
+
         WebElement firstName = driver.findElement(By.id("firstName"));
         WebElement lastName = driver.findElement(By.id("lastName"));
-
         firstName.sendKeys("John");
         lastName.sendKeys("Smith");
         DemoHelper.pause();

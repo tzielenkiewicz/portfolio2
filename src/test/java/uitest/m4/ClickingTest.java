@@ -14,7 +14,7 @@ public class ClickingTest {
     WebDriver driver;
     @BeforeMethod
     public void driverInitiation() {
-        DriverFactory.initDriver(driver);
+        driver = DriverFactory.initDriver();
     }
     @Test
     public void clickingTest(){

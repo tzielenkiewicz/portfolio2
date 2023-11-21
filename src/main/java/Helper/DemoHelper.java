@@ -8,4 +8,12 @@ public class DemoHelper {
             throw new RuntimeException(e);
         }
     }
+
+    public static void chosenTimePause(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

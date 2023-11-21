@@ -21,7 +21,7 @@ public class NavigationTest {
         driver.manage().window().maximize();
 
         driver.get(PREFIX + "index.html");
-        DemoHelper.pause();
+        DemoHelper.chosenTimePause(5000);
 
         driver.get(PREFIX + "savings.html");
         DemoHelper.pause();

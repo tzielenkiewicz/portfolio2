@@ -13,7 +13,6 @@ public class MorelePriceRangeTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.morele.net/kategoria/akcesoria-poleasingowe-1473/");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
 
         WebElement priceFrom = WaitingUtils.waitUntilClickable(driver, By.xpath("/html/body/main/div/div[1]/div[2]/div[1]/div[5]/div[1]/div[2]/div[2]/div[2]/div/div[1]/input"));
         WebElement priceTo = WaitingUtils.waitUntilClickable(driver, By.xpath("/html/body/main/div/div[1]/div[2]/div[1]/div[5]/div[1]/div[2]/div[2]/div[2]/div/div[2]/input"));

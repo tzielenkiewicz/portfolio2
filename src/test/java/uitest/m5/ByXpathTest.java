@@ -18,5 +18,4 @@ public class ByXpathTest {
 
         driver.quit();
     }
-
 }

@@ -11,7 +11,6 @@ import java.util.List;
 import static Helper.Pages.SAVINGS;
 
 public class GetTableDataTest {
-
     @Test
     public void getTableData() {
         WebDriver driver = DriverFactory.createdNewChromeDriver();

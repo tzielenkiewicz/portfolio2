@@ -27,7 +27,6 @@ public class NavigationTest {
         DemoHelper.pause();
         driver.navigate().refresh();
         DemoHelper.pause();
-;
     }
     @Test
     public void basicNavigationTestRefactored(){

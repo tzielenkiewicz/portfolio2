@@ -11,7 +11,6 @@ import java.util.List;
 
 import static Helper.Pages.SAVINGS;
 
-
 public class ByIdClassTagTest {
     @Test
     public void byClassName() {

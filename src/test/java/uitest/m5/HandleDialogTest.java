@@ -1,41 +1,35 @@
 package uitest.m5;
 
-import Factory.DriverFactory;
+import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HandleDialogTest {
+public class HandleDialogTest extends BasicHomeTestClass {
     @Test
     public void dismissAlertTest() {
-        WebDriver driver = DriverFactory.initDriver();
-
-        WebElement firstName = driver.findElement(By.id("firstName"));
-        WebElement lastName = driver.findElement(By.id("lastName"));
+        WebElement firstName = homePage.firstName();
+        WebElement lastName = homePage.lastName();
         firstName.sendKeys("John");
         lastName.sendKeys("Smith");
         DemoHelper.pause();
 
-        driver.findElement(By.id("clear")).click();
+        homePage.clearButton().click();
         DemoHelper.pause();
 
-        Alert alertPopup = driver.switchTo().alert();
+        Alert alertPopup = homePage.switchToAlert();
         alertPopup.dismiss();
 
         Assert.assertEquals(firstName.getAttribute("value"), "John");
         Assert.assertEquals(lastName.getAttribute("value"), "Smith");
 
-        driver.navigate().refresh();
+        homePage.refreshSite();
 
-        driver.findElement(By.id("clear")).click();
+        homePage.clearButton().click();
         DemoHelper.pause();
 
         alertPopup.accept();
-
-        driver.quit();
     }
 }

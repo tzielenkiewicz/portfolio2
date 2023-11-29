@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class ByXpathTest {
     @Test
     public void byXpathTest() {
-        WebDriver driver = DriverFactory.createdNewChromeDriver();
+        WebDriver driver = DriverFactory.createNewChromeDriver();
         driver.get("https://tzielenkiewicz.github.io/contact.html");
         WebElement githubContactLink = driver.findElement(By.xpath("//*[@id=\"nav2\"]/div[1]/a/i"));
         githubContactLink.click();

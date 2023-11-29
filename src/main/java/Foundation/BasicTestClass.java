@@ -9,7 +9,7 @@ public class BasicTestClass {
     protected WebDriver chDriver;
 
     @BeforeMethod
-    public void initDriver() {chDriver = DriverFactory.createdNewChromeDriver();}
+    public void initDriver() {chDriver = DriverFactory.createNewChromeDriver();}
 
     @AfterMethod
     public void cleanup() {chDriver.quit();}

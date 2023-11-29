@@ -1,36 +1,25 @@
 package uitest.m4;
 
-import Factory.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import Factory.CommonFunctions;
+import Foundation.BasicSavingsTestClass;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static Helper.Pages.SAVINGS;
-
-public class GetTableDataTest {
+public class GetTableDataTest extends BasicSavingsTestClass {
     @Test
     public void getTableData() {
-        WebDriver driver = DriverFactory.createdNewChromeDriver();
-        driver.get(SAVINGS);
-
-        WebElement table = driver.findElement(By.id("rates"));
+        WebElement table = savingsPage.ratesTable();
         System.out.println("Table data:");
         System.out.println(table.getText());
 
         System.out.println("Single row data:");
-        List<WebElement> tableRows = table.findElements(By.tagName("tr"));
+        List<WebElement> tableRows = savingsPage.getTableRows(table);
         System.out.println(tableRows.get(0).getText());
 
-        List<WebElement> rowCells = tableRows.get(1).findElements(By.tagName("td"));
+        List<WebElement> rowCells = savingsPage.getRowCells(tableRows.get(1));
         System.out.println("Particular cells data: ");
-        for (WebElement cell: rowCells) {
-            System.out.println(cell.getText());
-        }
-
-        driver.quit();
+        CommonFunctions.printEachElementOf(rowCells);
     }
-
 }

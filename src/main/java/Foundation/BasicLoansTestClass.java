@@ -4,16 +4,16 @@ import Factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.Home;
+import pages.Loans;
 
-public class BasicHomeTestClass {
+public class BasicLoansTestClass {
     protected WebDriver chDriver;
-    protected Home homePage;
+    protected Loans loansPage;
     @BeforeMethod
-    public void driverAndHomePageInitiation(){
+    public void driverAndLoansPageInitiation(){
         chDriver = DriverFactory.createNewChromeDriver();
-        homePage = Home.createHomePage(chDriver);
-        homePage.navigateTo();
+        loansPage = Loans.createLoansPage(chDriver);
+        loansPage.navigateTo();
     }
     @AfterMethod(alwaysRun = true)
     public void cleanup() {

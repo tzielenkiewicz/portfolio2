@@ -1,6 +1,5 @@
 package uitest.m7;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,13 +9,12 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Home;
 
+import java.time.Duration;
 import java.util.logging.Level;
 
-import static Helper.Pages.HOME;
-
 public class LogCaptureTest {
-    WebDriver driver;
     @Test
     public void logCaptureTest() {
         LoggingPreferences logs = new LoggingPreferences();
@@ -24,11 +22,16 @@ public class LogCaptureTest {
 
         ChromeOptions options = new ChromeOptions();
         options.setCapability(ChromeOptions.LOGGING_PREFS, logs);
-        driver = new ChromeDriver(options);
-        driver.get(HOME);
-        driver.findElement(By.id("register")).click();
 
-        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        WebDriver chDriver = new ChromeDriver(options);
+        chDriver.manage().window().maximize();
+        chDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+
+        Home homePage = Home.createHomePage(chDriver);
+        homePage.navigateTo();
+        homePage.registerButton().click();
+
+        LogEntries browserLogs = chDriver.manage().logs().get(LogType.BROWSER);
         Assert.assertFalse(browserLogs.getAll().isEmpty());
 
         browserLogs.forEach(System.out::println);
@@ -36,8 +39,7 @@ public class LogCaptureTest {
         browserLogs.forEach(logEntry -> System.out.println(logEntry.getLevel() + " " + logEntry.getMessage()));
 
         //browserLogs.forEach(this::checkNoError);
-        driver.quit();
-
+        chDriver.quit();
     }
 
     private void checkNoError(LogEntry logEntry) {

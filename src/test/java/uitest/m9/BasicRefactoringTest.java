@@ -11,10 +11,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Loans;
 
 import java.time.Duration;
-
-import static Helper.Pages.LOANS;
 
 public class BasicRefactoringTest {
     @Test
@@ -28,20 +27,21 @@ public class BasicRefactoringTest {
 
     @Test
     public void newDriverAndToolsTest() {
-        WebDriver chDriver = DriverFactory.createdNewChromeDriver();
+        WebDriver chDriver = DriverFactory.createNewChromeDriver();
 
-        WebDriver edDriver = DriverFactory.createdNewEdgeDriver();
+        WebDriver edDriver = DriverFactory.createNewEdgeDriver();
 
-        WebDriver nexusDriver = DriverFactory.newDeviceDriver("Nexus 5");
+        WebDriver nexusDriver = DriverFactory.createNewDeviceDriver("Nexus 5");
 
         DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
     }
 
     @Test
     public void refactoredTestDemo() {
-        WebDriver chDriver = DriverFactory.createdNewChromeDriver();
-        chDriver.get(LOANS);
-        chDriver.findElement(By.id("borrow")).sendKeys("500");
+        WebDriver chDriver = DriverFactory.createNewChromeDriver();
+        Loans loansPage = Loans.createLoansPage(chDriver);
+        loansPage.navigateTo();
+        loansPage.borrowField().sendKeys("500");
 
         WebElement messageReturned = WaitingUtils.waitUntilVisible(chDriver, By.id("result"), 6);
         Assert.assertEquals(messageReturned.getText(), "You will pays us back 1000");

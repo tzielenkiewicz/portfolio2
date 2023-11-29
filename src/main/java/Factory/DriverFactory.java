@@ -14,24 +14,24 @@ import static Helper.Pages.HOME;
 
 public class DriverFactory {
 
-    public static WebDriver createdNewHeadlessChromeDriver() {
+    public static WebDriver createNewHeadlessChromeDriver() {
         WebDriver driver = new ChromeDriver(headlessOption());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         return driver;
     }
 
-    public static WebDriver createdNewChromeDriver() {
+    public static WebDriver createNewChromeDriver() {
         return appliedCommonSetupDriver(new ChromeDriver());
     }
-    public static WebDriver createdNewEdgeDriver() {
+    public static WebDriver createNewEdgeDriver() {
         return appliedCommonSetupDriver(new EdgeDriver());
     }
 
-    public static WebDriver createdNewFirefoxDriver() {
+    public static WebDriver createNewFirefoxDriver() {
         return appliedCommonSetupDriver(new FirefoxDriver());
     }
 
-    public static WebDriver newDeviceDriver(String deviceName) {
+    public static WebDriver createNewDeviceDriver(String deviceName) {
         Map<String, String> mobileEmulation = Map.of("deviceName", deviceName);
         ChromeOptions chOptions = new ChromeOptions();
         chOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
@@ -46,7 +46,7 @@ public class DriverFactory {
 
 
     public static WebDriver initDriver() {
-        WebDriver driver = DriverFactory.createdNewChromeDriver();
+        WebDriver driver = DriverFactory.createNewChromeDriver();
         driver.get(HOME);
         return driver;
     }

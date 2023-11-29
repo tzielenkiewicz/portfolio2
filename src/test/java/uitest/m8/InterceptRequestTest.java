@@ -1,12 +1,14 @@
 package uitest.m8;
 
 import Factory.DevToolsFactory;
+import Helper.DemoHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.HasDevTools;
+import org.openqa.selenium.devtools.v117.emulation.Emulation;
 import org.openqa.selenium.devtools.v117.network.Network;
 import org.openqa.selenium.devtools.v117.network.model.Request;
 import org.openqa.selenium.devtools.v117.network.model.Response;
@@ -79,6 +81,19 @@ public class InterceptRequestTest {
     }
 
     @Test
+    public void geolocationTest() {
+        ChromeDriver chDriver = new ChromeDriver();
+        DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
+        chTools.send(Emulation.setGeolocationOverride(Optional.of(51.4993), Optional.of(-0.0995), Optional.of(100)));
+        chDriver.get("http://127.0.0.1:8080/index.html");
+        WebElement location = new WebDriverWait(chDriver, Duration.ofSeconds(5))
+                .until(visibilityOfElementLocated(By.id("location")));
+        Assert.assertTrue(location.getText().contains("You are visiting us from"));
+        DemoHelper.pause();
+
+        chDriver.quit();
+    }
+    @Test
     public void manipulateChromeTrafficTest() {
         ChromeDriver chDriver = new ChromeDriver();
         DevTools chTools = DevToolsFactory.newChromeDevTool(chDriver);
@@ -89,6 +104,7 @@ public class InterceptRequestTest {
         WebElement location = new WebDriverWait(chDriver, Duration.ofSeconds(5))
                 .until(visibilityOfElementLocated(By.id("location")));
         Assert.assertTrue(location.getText().contains("You are visiting us from"));
+        DemoHelper.pause();
 
         chDriver.quit();
     }

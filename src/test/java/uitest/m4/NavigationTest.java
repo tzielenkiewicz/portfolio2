@@ -13,7 +13,7 @@ public class NavigationTest {
     WebDriver driver;
     @Test
     public void basicNavigationTest() {
-        driver = Factory.DriverFactory.createdNewChromeDriver();
+        driver = Factory.DriverFactory.createNewChromeDriver();
 
         driver.get(PREFIX + "index.html");
         DemoHelper.chosenTimePause(5000);
@@ -32,7 +32,6 @@ public class NavigationTest {
     public void basicNavigationTestRefactored(){
         driver = DriverFactory.initDriver();
         driver.get(SAVINGS);
-
     }
 
     @AfterMethod

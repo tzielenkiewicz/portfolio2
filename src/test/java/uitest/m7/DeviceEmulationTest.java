@@ -10,7 +10,7 @@ import static Helper.Pages.HOME;
 public class DeviceEmulationTest {
     @Test
     public void deviceEmulationTest() {
-        WebDriver driver = DriverFactory.newDeviceDriver("Nexus 5");
+        WebDriver driver = DriverFactory.createNewDeviceDriver("Nexus 5");
         driver.get(HOME);
 
         DemoHelper.pause();

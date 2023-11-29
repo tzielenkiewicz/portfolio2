@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 public class ClickingTest extends BasicHomeTestClass {
     @Test
     public void clickingTest(){
-        WebElement checkBoxHowHeardAbout = chDriver.findElement(By.id("heard-about"));
-        WebElement buttonRegister = chDriver.findElement(By.id("register"));
+        WebElement checkBoxHowHeardAbout = homePage.checkboxHeardAbout();
+        WebElement buttonRegister = homePage.registerButton();
 
         checkBoxHowHeardAbout.click();
         buttonRegister.click();

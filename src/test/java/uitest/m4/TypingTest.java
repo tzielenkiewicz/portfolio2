@@ -2,25 +2,23 @@ package uitest.m4;
 
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TypingTest extends BasicHomeTestClass {
     @Test
     public void typingTest(){
-        WebElement inputName = homePage.firstName();
-        WebElement inputLastName = homePage.lastName();
-        WebElement inputEmail = homePage.email();
-        WebElement inputDateOfBirth = homePage.dateOfBirth();
-
-        inputName.sendKeys("Sofia");
-        inputLastName.sendKeys("Diaz");
-        inputEmail.sendKeys("sofia@email.com");
+        homePage.fillInputFirstName("Sofia");
+        homePage.fillInputLastName("Diaz");
+        homePage.fillEmail("sofia@email.com");
         DemoHelper.pause();
-        inputEmail.clear();
-        inputEmail.sendKeys("sofia@email.com");
+        homePage.clearChosenField("email");
+        homePage.clearChosenField("firstName");
+        DemoHelper.pause();
 
-        inputDateOfBirth.sendKeys("21032022");
+        homePage.fillInputFirstName("Lusinda");
+        homePage.fillEmail("lusinda@email.com");
+        homePage.fillDateOfBirth("21032022");
+
         DemoHelper.pause();
     }
 }

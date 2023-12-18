@@ -29,7 +29,7 @@ public class LogCaptureTest {
 
         Home homePage = Home.createHomePage(chDriver);
         homePage.navigateTo();
-        homePage.registerButton().click();
+        homePage.clickRegisterButton();
 
         LogEntries browserLogs = chDriver.manage().logs().get(LogType.BROWSER);
         Assert.assertFalse(browserLogs.getAll().isEmpty());

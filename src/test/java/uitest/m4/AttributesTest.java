@@ -15,7 +15,7 @@ public class AttributesTest extends BasicHomeTestClass {
         Assert.assertFalse(textAreaToEnable.isEnabled());
 
         if(textAreaToEnable.isEnabled()) {
-            textAreaToEnable.sendKeys("test keys");
+            homePage.fillTextArea("test keys");
         }
 
         WebElement checkBoxHowHeardAbout = homePage.checkboxHeardAbout();
@@ -23,7 +23,7 @@ public class AttributesTest extends BasicHomeTestClass {
         Assert.assertTrue(checkBoxHowHeardAbout.isSelected());
 
         if(textAreaToEnable.isEnabled()) {
-            textAreaToEnable.sendKeys("test keys");
+            homePage.fillTextArea("test keys");
         }
         DemoHelper.pause();
     }

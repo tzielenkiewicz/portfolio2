@@ -32,5 +32,6 @@ public class GeoLocationTest {
         Assert.assertEquals(userLocation.getText(), "You are visiting us from London");
 
         chTools.close();
+        chDriver.quit();
     }
 }

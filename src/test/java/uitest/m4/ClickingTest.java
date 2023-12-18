@@ -10,11 +10,9 @@ import org.testng.annotations.Test;
 public class ClickingTest extends BasicHomeTestClass {
     @Test
     public void clickingTest(){
-        WebElement checkBoxHowHeardAbout = homePage.checkboxHeardAbout();
-        WebElement buttonRegister = homePage.registerButton();
+        homePage.clickCheckBoxHowHeardAbout();
+        homePage.clickRegisterButton();
 
-        checkBoxHowHeardAbout.click();
-        buttonRegister.click();
         DemoHelper.pause();
     }
     @Test
@@ -24,6 +22,7 @@ public class ClickingTest extends BasicHomeTestClass {
 
         actions.doubleClick(checkBoxHowHeardAbout).perform();
         actions.contextClick(checkBoxHowHeardAbout).perform();
+
         DemoHelper.pause();
     }
 }

@@ -1,12 +1,11 @@
 package uitest.m5;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.SessionStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,45 +16,37 @@ import static Helper.Pages.SAVINGS;
 public class StorageAndCookiesTest extends BasicHomeTestClass {
     @Test
     public void storageTest() {
-        WebElement firstName = homePage.firstName();
-        WebElement lastName = homePage.lastName();
-        WebElement birthDatePicker = homePage.dateOfBirth();
-        WebElement email = homePage.email();
-        WebElement saveButton = homePage.saveButton();
+        homePage.fillInputFirstName("Maria");
+        homePage.fillInputLastName("Diaz");
+        homePage.fillDateOfBirth("11/12/1999");
+        homePage.fillEmail("maria_diaz@email.com");
+        homePage.clickSaveButton();
 
-        firstName.sendKeys("Maria");
-        lastName.sendKeys("Diaz");
-        birthDatePicker.sendKeys("11/12/1999");
-        email.sendKeys("maria_diaz@email.com");
-        saveButton.click();
-
-        WebStorage myWebStorage = (WebStorage) chDriver;
-        SessionStorage savedStorage = myWebStorage.getSessionStorage();
-        savedStorage.keySet().forEach(key -> System.out.println(key + "=" + savedStorage.getItem(key)));
+        SessionStorage savedStorage = CommonFunctions.getSessionStorage(chDriver);
+        CommonFunctions.printElementsOfSessionStorage(savedStorage);
 
         DemoHelper.pause();
 
         chDriver.get(SAVINGS);
-        chDriver.navigate().back();
+        CommonFunctions.navigateBack(chDriver);
 
         DemoHelper.pause();
 
-        WebElement firstNameFromStorage = homePage.firstName();
-        WebElement lastNameFromStorage = homePage.lastName();
+        String currentFirstNameAttributeValue = homePage.firstName().getAttribute("value");
+        String currentLastNameAttributeValue = homePage.lastName().getAttribute("value");
+        Assert.assertEquals(currentFirstNameAttributeValue, "Maria");
+        Assert.assertEquals(currentLastNameAttributeValue, "Diaz");
 
-        Assert.assertEquals(firstNameFromStorage.getAttribute("value"), "Maria");
-        Assert.assertEquals(lastNameFromStorage.getAttribute("value"), "Diaz");
-
-        savedStorage.clear();
-        homePage.refreshSite();
+        CommonFunctions.clearStorage(chDriver);
+        homePage.refreshPage();
 
         DemoHelper.pause();
 
-        WebElement firstNameAfterRefresh = homePage.firstName();
-        WebElement lastNameAfterRefresh = homePage.lastName();
+        String firstNameAfterRefreshAttributeValue = homePage.firstName().getAttribute("value");
+        String lastNameAfterRefreshAttributeValue = homePage.lastName().getAttribute("value");
 
-        Assert.assertEquals(firstNameAfterRefresh.getAttribute("value"), "");
-        Assert.assertEquals(lastNameAfterRefresh.getAttribute("value"), "");
+        Assert.assertEquals(firstNameAfterRefreshAttributeValue, "");
+        Assert.assertEquals(lastNameAfterRefreshAttributeValue, "");
     }
     @Test
     public void cookiesTest() {

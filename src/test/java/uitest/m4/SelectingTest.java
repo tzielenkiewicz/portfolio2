@@ -7,11 +7,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static pages.Savings.Period.ONE_YEAR;
+import static pages.Savings.Period.TWO_YEARS;
+
 public class SelectingTest extends BasicSavingsTestClass {
     @Test
     public void selectingTest() {
-        WebElement inputDeposit = savingsPage.depositInput();
-        inputDeposit.sendKeys("100");
+        savingsPage.inputDepositValue("100");
 
         WebElement dropDownPeriod = savingsPage.periodDropDownChoice();
         Select dropDown = new Select(dropDownPeriod);
@@ -24,5 +26,20 @@ public class SelectingTest extends BasicSavingsTestClass {
         WebElement resultResponse = savingsPage.resultInfo();
         System.out.println(resultResponse.getText());
         Assert.assertEquals(resultResponse.getText(), "After 2 Years you will earn $12.00 on your deposit");
+    }
+
+    @Test
+    public void selectingTestWithAbstraction() {
+        savingsPage.inputDepositValue("500");
+        savingsPage.selectTimePeriod(ONE_YEAR);
+
+        Assert.assertTrue(savingsPage.resultInfo().isDisplayed());
+        Assert.assertEquals(savingsPage.resultInfo().getText(), "After 1 Year you will earn $25.00 on your deposit");
+
+        savingsPage.clearInputDepositValue();
+        savingsPage.inputDepositValue("1000");
+        savingsPage.selectTimePeriod(TWO_YEARS);
+
+        Assert.assertEquals(savingsPage.resultInfo().getText(), "After 2 Years you will earn $120.00 on your deposit");
     }
 }

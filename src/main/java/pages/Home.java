@@ -1,10 +1,12 @@
 package pages;
 
+import Factory.CommonFunctions;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -74,13 +76,77 @@ public class Home {
         return driver.switchTo().alert();
     }
 
-    public void refreshSite() {
-        driver.navigate().refresh();
-    }
-
     public WebElement firstMatchInvalidFeedbackInfo() {return driver.findElement(By.className("invalid-feedback"));}
 
     public WebElement userLocationDetails(WebDriver chDriver) {
         return new WebDriverWait(chDriver, Duration.ofSeconds(3)).until(visibilityOfElementLocated(By.id("location")));
     }
+
+    public void fillTextArea(String yourKeys) {
+        textArea().sendKeys(yourKeys);
+    }
+
+    public void clickCheckBoxHowHeardAbout() {
+        checkboxHeardAbout().click();
+    }
+
+    public void clickRegisterButton() {
+        registerButton().click();
+    }
+
+    public void printEachElementOfFeedback() {
+        CommonFunctions.printEachElementOf(invalidFeedback());
+    }
+
+    public void fillInputFirstName(String name) {
+        firstName().sendKeys(name);
+    }
+
+    public void fillInputLastName(String surname) {
+        lastName().sendKeys(surname);
+    }
+
+    public void fillEmail(String mail) {
+        email().sendKeys(mail);
+    }
+
+    public void clearChosenField(String field) {
+        switch (field) {
+            case "email" -> email().clear();
+            case "firstName" -> firstName().clear();
+            case "lastName" -> lastName().clear();
+            case "dob" -> dateOfBirth().clear();
+            default -> System.out.println("Nie ma pola o nazwie " + field + "!");
+        }
+    }
+
+    public void fillDateOfBirth(String date) {
+        dateOfBirth().sendKeys(date);
+    }
+
+    public void fillDateOfBirthUsingCSSLocator(String date) { dateOfBirthByCSS().sendKeys(date); }
+
+    public void refreshPage() { driver.navigate().refresh(); }
+
+    public void clickCheckBoxHowHeardAboutUsingCSSLocator() { checkboxHeardAboutByCSS().click(); }
+
+    public void isCheckBoxHeardAboutSelected() { checkboxHeardAbout().isSelected(); }
+
+    public void printFirstMatchFeedback() { CommonFunctions.printChosenElement(firstMatchInvalidFeedbackInfo()); }
+
+    public void assertFeedbackMultipleInformation(String[] feedbackAnswers) {
+        for(int i=0; i<feedbackAnswers.length; i++) {
+            Assert.assertEquals(invalidFeedback().get(i).getText(), feedbackAnswers[i]);
+        }
+    }
+
+    public void clickClearButton() { clearButton().click(); }
+
+    public void dismissPopupAlert() { switchToAlert().dismiss(); }
+
+    public void acceptPopupAlert() { switchToAlert().accept(); }
+
+    public WebElement formByTagName() { return driver.findElement(By.tagName("form")); }
+
+    public void clickSaveButton() { saveButton().click(); }
 }

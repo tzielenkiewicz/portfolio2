@@ -1,5 +1,6 @@
 package uitest.m7;
 
+import Factory.CommonFunctions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,7 +30,7 @@ public class LogCaptureTest {
 
         Home homePage = Home.createHomePage(chDriver);
         homePage.navigateTo();
-        homePage.clickRegisterButton();
+        CommonFunctions.clickSpecifiedElement(homePage.registerButton());
 
         LogEntries browserLogs = chDriver.manage().logs().get(LogType.BROWSER);
         Assert.assertFalse(browserLogs.getAll().isEmpty());

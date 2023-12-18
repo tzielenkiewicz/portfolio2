@@ -86,14 +86,6 @@ public class Home {
         textArea().sendKeys(yourKeys);
     }
 
-    public void clickCheckBoxHowHeardAbout() {
-        checkboxHeardAbout().click();
-    }
-
-    public void clickRegisterButton() {
-        registerButton().click();
-    }
-
     public void printEachElementOfFeedback() {
         CommonFunctions.printEachElementOf(invalidFeedback());
     }
@@ -128,8 +120,6 @@ public class Home {
 
     public void refreshPage() { driver.navigate().refresh(); }
 
-    public void clickCheckBoxHowHeardAboutUsingCSSLocator() { checkboxHeardAboutByCSS().click(); }
-
     public void isCheckBoxHeardAboutSelected() { checkboxHeardAbout().isSelected(); }
 
     public void printFirstMatchFeedback() { CommonFunctions.printChosenElement(firstMatchInvalidFeedbackInfo()); }
@@ -140,13 +130,10 @@ public class Home {
         }
     }
 
-    public void clickClearButton() { clearButton().click(); }
-
     public void dismissPopupAlert() { switchToAlert().dismiss(); }
 
     public void acceptPopupAlert() { switchToAlert().accept(); }
 
     public WebElement formByTagName() { return driver.findElement(By.tagName("form")); }
 
-    public void clickSaveButton() { saveButton().click(); }
 }

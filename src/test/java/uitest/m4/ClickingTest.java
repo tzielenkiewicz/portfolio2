@@ -1,5 +1,6 @@
 package uitest.m4;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.openqa.selenium.By;
@@ -10,8 +11,8 @@ import org.testng.annotations.Test;
 public class ClickingTest extends BasicHomeTestClass {
     @Test
     public void clickingTest(){
-        homePage.clickCheckBoxHowHeardAbout();
-        homePage.clickRegisterButton();
+        CommonFunctions.clickSpecifiedElement(homePage.checkboxHeardAbout());
+        CommonFunctions.clickSpecifiedElement(homePage.registerButton());
 
         DemoHelper.pause();
     }

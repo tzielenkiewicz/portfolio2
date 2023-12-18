@@ -1,5 +1,6 @@
 package uitest.m5;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ public class HandleDialogTest extends BasicHomeTestClass {
         homePage.fillInputLastName("Smith");
         DemoHelper.pause();
 
-        homePage.clickClearButton();
+        CommonFunctions.clickSpecifiedElement(homePage.clearButton());
         DemoHelper.pause();
 
         homePage.dismissPopupAlert();
@@ -22,7 +23,7 @@ public class HandleDialogTest extends BasicHomeTestClass {
 
         homePage.refreshPage();
 
-        homePage.clickClearButton();
+        CommonFunctions.clickSpecifiedElement(homePage.clearButton());
         DemoHelper.pause();
 
         homePage.acceptPopupAlert();

@@ -1,5 +1,6 @@
 package uitest.m8;
 
+import Factory.CommonFunctions;
 import Helper.DemoHelper;
 import Wait.WaitingUtils;
 import org.openqa.selenium.*;
@@ -19,7 +20,7 @@ public class MorelePriceRangeTest {
 
         Assert.assertNotEquals(priceFrom.getAttribute("value"), "200");
 
-        priceFrom.click();
+        CommonFunctions.clickSpecifiedElement(priceFrom);
         priceFrom.sendKeys(Keys.CONTROL +"a");
         priceFrom.sendKeys(Keys.DELETE);
         priceFrom.sendKeys("200");

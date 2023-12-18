@@ -24,8 +24,8 @@ public class CommonFunctions {
         }
     }
 
-    public static void printChosenElement(WebElement object) {
-        System.out.println(object.getText());
+    public static void printChosenElement(WebElement chosenElement) {
+        System.out.println(chosenElement.getText());
     }
 
     public static void takeFullScreenshotAndSaveToFile(WebDriver chDriver) {
@@ -65,4 +65,7 @@ public class CommonFunctions {
         WebStorage myWebStorage = (WebStorage) driver;
         return myWebStorage.getSessionStorage();
     }
+
+    public static void clickSpecifiedElement(WebElement elementToClick) { elementToClick.click(); }
+
 }

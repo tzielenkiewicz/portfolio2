@@ -1,5 +1,6 @@
 package uitest.m6;
 
+import Factory.CommonFunctions;
 import Foundation.BasicLoansTestClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ public class WaitingTest extends BasicLoansTestClass {
         loansPage.fillBorrowField("500");
         Assert.assertFalse(result.isDisplayed()); //element istnieje w HTML, ale jeszcze nie jest wyświetlony, na takie elementy metoda timeouts nie działa
 
-        loansPage.clickSpecifiedElement(result); //jeśli nie ma w co klikać, to program "przypomina sobie", że ma ustawiony timeouts 6s, jeśli element się pojawi przez ten czas, test przejdzie
+        CommonFunctions.clickSpecifiedElement(result); //jeśli nie ma w co klikać, to program "przypomina sobie", że ma ustawiony timeouts 6s, jeśli element się pojawi przez ten czas, test przejdzie
     }
 
     @Test
@@ -27,7 +28,7 @@ public class WaitingTest extends BasicLoansTestClass {
         WebElement result = loansPage.waitForResultForSpecifiedTime(6);
         Assert.assertTrue(result.isDisplayed());
 
-        loansPage.clickSpecifiedElement(result); //interactable?
+        CommonFunctions.clickSpecifiedElement(result); //interactable?
     }
 
     @Test

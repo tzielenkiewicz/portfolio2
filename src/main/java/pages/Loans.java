@@ -80,8 +80,6 @@ public class Loans {
         return waitingForResult.until(ExpectedConditions.visibilityOfElementLocated(By.id("result")));
     }
 
-    public void clickSpecifiedElement(WebElement result) { result.click(); }
-
     public void setImplicitlyWaitTimeout(int seconds) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }

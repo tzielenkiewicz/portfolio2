@@ -1,5 +1,6 @@
 package uitest.m4;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import org.testng.annotations.Test;
 
@@ -8,7 +9,7 @@ public class FindMultipleElementsTest extends BasicHomeTestClass {
     public void multipleElementsTest() {
         homePage.printEachElementOfFeedback();
 
-        homePage.clickRegisterButton();
+        CommonFunctions.clickSpecifiedElement(homePage.registerButton());
 
         homePage.printEachElementOfFeedback();
     }

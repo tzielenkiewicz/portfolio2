@@ -1,5 +1,6 @@
 package uitest.m5;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class ByCssSelectorTest extends BasicHomeTestClass {
 
     @Test
     public void byCSSTest_2() {
-        homePage.clickCheckBoxHowHeardAboutUsingCSSLocator();
+        CommonFunctions.clickSpecifiedElement(homePage.checkboxHeardAboutByCSS());
         homePage.isCheckBoxHeardAboutSelected();
         DemoHelper.pause();
     }

@@ -1,5 +1,6 @@
 package uitest.m4;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import Helper.DemoHelper;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ public class AttributesTest extends BasicHomeTestClass {
         }
 
         WebElement checkBoxHowHeardAbout = homePage.checkboxHeardAbout();
-        checkBoxHowHeardAbout.click();
+        CommonFunctions.clickSpecifiedElement(checkBoxHowHeardAbout);
         Assert.assertTrue(checkBoxHowHeardAbout.isSelected());
 
         if(textAreaToEnable.isEnabled()) {
@@ -32,7 +33,7 @@ public class AttributesTest extends BasicHomeTestClass {
     public void isDisplayedTest() {
         WebElement feedback = homePage.invalidFeedback().getFirst();
         Assert.assertFalse(feedback.isDisplayed());
-        homePage.registerButton().click();
+        CommonFunctions.clickSpecifiedElement(homePage.registerButton());
         Assert.assertTrue(feedback.isDisplayed());
     }
 }

@@ -1,5 +1,6 @@
 package uitest.m5;
 
+import Factory.CommonFunctions;
 import Foundation.BasicHomeTestClass;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ByIdClassTagTest extends BasicHomeTestClass {
     @Test
     public void byClassName() {
-        homePage.clickRegisterButton();
+        CommonFunctions.clickSpecifiedElement(homePage.registerButton());
 
         homePage.printFirstMatchFeedback();
 

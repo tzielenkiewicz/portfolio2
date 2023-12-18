@@ -20,7 +20,7 @@ public class StorageAndCookiesTest extends BasicHomeTestClass {
         homePage.fillInputLastName("Diaz");
         homePage.fillDateOfBirth("11/12/1999");
         homePage.fillEmail("maria_diaz@email.com");
-        homePage.clickSaveButton();
+        CommonFunctions.clickSpecifiedElement(homePage.saveButton());
 
         SessionStorage savedStorage = CommonFunctions.getSessionStorage(chDriver);
         CommonFunctions.printElementsOfSessionStorage(savedStorage);

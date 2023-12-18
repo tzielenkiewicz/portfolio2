@@ -41,7 +41,7 @@ public class Loans {
     }
 
     private Path createFilePath() {
-        Path filePath = null;
+        Path filePath;
         try {
             filePath= Files.createTempFile("file", ".txt");
             return filePath;

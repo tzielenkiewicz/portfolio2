@@ -5,8 +5,6 @@ import Foundation.BasicHomeTestClass;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 public class ScreenshotTest extends BasicHomeTestClass {
     @Test
     public void screenshotTest() {
@@ -14,7 +12,7 @@ public class ScreenshotTest extends BasicHomeTestClass {
     }
 
     @Test
-    public void elementScreenshot() throws IOException {
+    public void elementScreenshot() {
         WebElement foundForm = homePage.formByTagName();
         CommonFunctions.takeChosenElementScreenshotAndSaveToFile(foundForm);
     }
